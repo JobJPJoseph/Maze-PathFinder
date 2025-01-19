@@ -8,5 +8,5 @@
     Custom Erros:
     Handling Errors:
     ES6 syntax:
-    Implement Binary Tree Data Structure:
+    Implement Linked List Data Structure:
     Stacks and Queues:
