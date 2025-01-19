@@ -9,3 +9,4 @@
     Handling Errors:
     ES6 syntax:
     Implement Binary Tree Data Structure:
+    Stacks and Queues:
