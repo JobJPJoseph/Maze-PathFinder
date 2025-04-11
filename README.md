@@ -1,12 +1,14 @@
 * Maze Pathfinder Project
 
 ## Concepts to implement:
-    Binding (context):
+    Binding (context): Not necessary
     NPM Packages (Mocha/Chai):
-    Class instances:
+    Class instances: Not necessary
     Single Respondsibility Principle:
-    Custom Erros:
+    Custom Errors:
     Handling Errors:
     ES6 syntax:
-    Implement Linked List Data Structure:
-    Stacks and Queues:
+    Stacks or Queues:
+    Implement Data Structures (Graphs/Matrix):
+    Implement Algorithm (DFT or BFT):
+    Optimization (Required!!!):
