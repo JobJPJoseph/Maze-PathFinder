@@ -21,33 +21,24 @@ describe('Format Maze', function () {
     let format;
 
     beforeEach(function () {
-        format = new FormatMaze();
+        format = new FormatMaze(data);
     });
 
     describe('constructor', function () {
 
         it('should set a property called this.maze and set it to the argument that was passed in.', function () {
-            expect(format.maze).to.be.a(String);
+            expect(format.maze).to.be.a('string');
         });
 
         it('should set a property called this.matrix to be an empty array', function () {
-            expect(format.matrix).a.instanceOf(Array);
-            expect(format.matrix).to.equal(0);
+            expect(format.matrix).to.be.a.instanceOf(Array);
+            expect(format.matrix.length).to.equal(0);
         });
 
 
     });
 
     describe('formatMatrix', function () {
-
-        it('should accept a single argument that is a string type', function () {
-            let formatMatrixSpy = chai.spy.on(format, 'formatMatrix');
-
-            format.formatMatrix(data);
-
-            expect(formatMatrixSpy).to.have.been.called.with(data);
-            chai.restore(format, 'formatMatrix');
-        });
 
         it('should return a matrix', function () {
 
@@ -63,25 +54,34 @@ describe('Format Maze', function () {
                 ['*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*', '*']
             ];
 
-            let actual = format.formatMatrix(data);
+            format.formatMatrix();
 
-            expect(actual.length === expected.length).to.be.true;
-            expect(actual[0].length === expected[0].length).to.be.true;
-            expect(actual[1].length === expected[1].length).to.be.true;
-            expect(actual[2].length === expected[2].length).to.be.true;
-            expect(actual[3].length === expected[3].length).to.be.true;
-            expect(actual[4].length === expected[4].length).to.be.true;
-            expect(actual[5].length === expected[5].length).to.be.true;
-            expect(actual[6].length === expected[6].length).to.be.true;
-            expect(actual[7].length === expected[7].length).to.be.true;
+            expect(format.matrix.length === expected.length).to.be.true;
+            expect(format.matrix[0].length === expected[0].length).to.be.true;
+            expect(format.matrix[1].length === expected[1].length).to.be.true;
+            expect(format.matrix[2].length === expected[2].length).to.be.true;
+            expect(format.matrix[3].length === expected[3].length).to.be.true;
+            expect(format.matrix[4].length === expected[4].length).to.be.true;
+            expect(format.matrix[5].length === expected[5].length).to.be.true;
+            expect(format.matrix[6].length === expected[6].length).to.be.true;
+            expect(format.matrix[7].length === expected[7].length).to.be.true;
 
             for (let i = 0; i < expected.length; i++) {
-                let actualNode = actual[i];
+                let actualNode = format.matrix[i];
                 let expectedNode = expected[i];
 
-                expect(actualNode === expectedNode).to.be.true;
+                expect(String(actualNode) === String(expectedNode)).to.be.true;
             }
 
+        });
+
+    });
+
+    describe('printMatrix', function () {
+
+        it('should print out the grid', function () {
+            format.formatMatrix();
+            format.printMatrix();
         });
 
     });
