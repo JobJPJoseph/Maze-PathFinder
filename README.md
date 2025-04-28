@@ -8,7 +8,7 @@
     Custom Errors:
     Handling Errors:
     ES6 syntax:
-    Stacks or Queues:
+    Priority Queue:
     Implement Data Structures (Graphs/Matrix):
     Implement Algorithm (DFT or BFT):
-    Optimization (Required!!!):
+    Optimization (Dijkstra Algorithm!!!):
