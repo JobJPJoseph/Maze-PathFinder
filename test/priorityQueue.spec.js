@@ -157,100 +157,129 @@ describe('MinimumPriorityQueue', function () {
 
     });
 
-    // describe('enqueue', function () {
+    describe('enqueue', function () {
 
-    //     it('should accept two arguments', function () {
-    //         let spyEnqueue = chai.spy.on(mpQueue, 'enqueue');
-    //         mpQueue.enqueue("test", 24);
-    //         expect(spyEnqueue).to.be.called.with('test', 24);
-    //         chai.spy.restore(mpQueue, 'enqueue');
-    //     });
+        it('should accept two arguments', function () {
+            let spyEnqueue = chai.spy.on(mpQueue, 'enqueue');
+            mpQueue.enqueue("test", 24);
+            expect(spyEnqueue).to.be.called.with('test', 24);
+            chai.spy.restore(mpQueue, 'enqueue');
+        });
 
-    //     it('should call binarySortUp', function () {
-    //         let spySortUp = chai.spy.on(mpQueue, 'binarySortUp');
-    //         mpQueue.enqueue("test", 24);
-    //         expect(spySortUp).to.be.called.once;
-    //         chai.spy.restore(mpQueue, 'binarySortUp');
-    //     });
+        it('should call binarySortUp', function () {
+            let spySortUp = chai.spy.on(mpQueue, 'binarySortUp');
+            mpQueue.enqueue("test", 24);
+            expect(spySortUp).to.be.called.once;
+            chai.spy.restore(mpQueue, 'binarySortUp');
+        });
+
+        it('should increment the length', function () {
+            let val = "S";
+            let distance = 25;
+            mpQueue.enqueue(val, distance);
+
+            expect(mpQueue.length).to.equal(1);
+        });
+
+    });
+
+    describe('dequeue', function () {
+
+        it('should call binarySortDown', function () {
+            mpQueue.enqueue("A", 20);
+
+            let spySortDown = chai.spy.on(mpQueue, 'binarySortDown');
+            mpQueue.dequeue();
+            expect(spySortDown).to.be.called;
+            chai.spy.restore(mpQueue, 'binarySortDown');
+        });
+
+        it('should return the dequeued node', function () {
+            mpQueue.enqueue("A", 20);
+            mpQueue.enqueue("B", 19);
+            mpQueue.enqueue("C", 22);
+            mpQueue.enqueue("D", 26);
+            mpQueue.enqueue("E", 15);
+            mpQueue.enqueue("F", 29);
+            mpQueue.enqueue("G", 21);
+
+            let obj = mpQueue.dequeue();
+            expect(obj.value).to.equal('E');
+            expect(obj.priority).to.equal(15);
+        });
+
+        it('should decrement the this.length', function () {
+            mpQueue.enqueue("A", 20);
+            mpQueue.enqueue("B", 19);
+            mpQueue.enqueue("C", 22);
+            mpQueue.enqueue("D", 26);
+            mpQueue.enqueue("E", 15);
+            mpQueue.enqueue("F", 29);
+            mpQueue.enqueue("G", 21);
+
+            mpQueue.dequeue()
+
+            expect(mpQueue.length).to.equal(6);
+        });
+
+    });
+
+    describe('binarySortDown', function () {
 
 
-    //     it('should add the value into the queue', function () {
-    //         // let obj = { value: "S", priority: 25};
-    //         let val = "S";
-    //         let distance = 25;
-    //         mpQueue.enqueue(val, distance);
+        it('should re-sort after removing from the queue', function () {
+            mpQueue.enqueue("A", 20);
+            mpQueue.enqueue("B", 19);
+            mpQueue.enqueue("C", 22);
+            mpQueue.enqueue("D", 26);
+            mpQueue.enqueue("E", 15);
+            mpQueue.enqueue("F", 29);
+            mpQueue.enqueue("G", 21);
 
-    //         expect(mpQueue.heap[0]).to.be.a('object');
-    //         expect(mpQueue.heap[0].value).to.exist.and.to.equal("S");
-    //         expect(mpQueue.heap[0].priority).to.exist.and.to.equal(25);
-    //     });
+            mpQueue.dequeue();
+            // Before: [ebgdafc]
+            // Before: [E:15, B:19, G:21, D:26, A:20, F:29, C:22];
 
-    //     it('should increment the length', function () {
-    //         let val = "S";
-    //         let distance = 25;
-    //         mpQueue.enqueue(val, distance);
+            expect(mpQueue.heap[0].priority).to.equal(19);
+            expect(mpQueue.heap[1].priority).to.equal(20);
+            expect(mpQueue.heap[2].priority).to.equal(21);
+            expect(mpQueue.heap[3].priority).to.equal(26);
+            expect(mpQueue.heap[4].priority).to.equal(22);
+            expect(mpQueue.heap[5].priority).to.equal(29);
 
-    //         expect(mpQueue.length).to.equal(1);
-    //     });
+            mpQueue.dequeue();
 
-    //     it('should the sort the heap', function () {
-    //         let val = "S";
-    //         let distance = 25;
-    //         mpQueue.enqueue(val, distance);
+            expect(mpQueue.heap[0].priority).to.equal(20);
+            expect(mpQueue.heap[1].priority).to.equal(22);
+            expect(mpQueue.heap[2].priority).to.equal(21);
+            expect(mpQueue.heap[3].priority).to.equal(26);
+            expect(mpQueue.heap[4].priority).to.equal(29);
 
-    //         let val2 = "E";
-    //         let distance2 = 24;
-    //         mpQueue.enqueue(val2, distance2);
+            mpQueue.dequeue();
 
-    //         expect(mpQueue.heap[0].value).to.equal('E');
-    //         expect(mpQueue.heap[1].value).to.equal('S');
-    //     });
+            expect(mpQueue.heap[0].priority).to.equal(21);
+            expect(mpQueue.heap[1].priority).to.equal(22);
+            expect(mpQueue.heap[2].priority).to.equal(29);
+            expect(mpQueue.heap[3].priority).to.equal(26);
 
-    // });
+            mpQueue.dequeue();
 
-    // describe('binarySortDown', function () {
+            expect(mpQueue.heap[0].priority).to.equal(22);
+            expect(mpQueue.heap[1].priority).to.equal(26);
+            expect(mpQueue.heap[2].priority).to.equal(29);
 
-    //     context('When the last number is the largest', function () {
+            mpQueue.dequeue();
 
-    //         it('should re-sort after removing from the queue', function () {
-    //             // mpQueue.enqueue("A", 20);
-    //             // mpQueue.enqueue("B", 19);
-    //             // mpQueue.enqueue("C", 22);
-    //             // mpQueue.enqueue("D", 26);
-    //             // mpQueue.enqueue("E", 15);
-    //             // mpQueue.enqueue("F", 29);
-    //             // mpQueue.enqueue("G", 25);
+            expect(mpQueue.heap[0].priority).to.equal(26);
+            expect(mpQueue.heap[1].priority).to.equal(29);
 
-    //             // //         A
-    //             // //      /     \
-    //             // //    B         C
-    //             // //  /  \       /  \
-    //             // // D    E     F    G
-    //             // // [A:20, B:19, C:22, D:26, E:15, F:29, G:25]
-    //             // // [B:19, A:20, C:22, D:26, E:15] Before
-    //             // // [B:19, E:15, C:22, D:26, A:20] After
+            mpQueue.dequeue();
 
-    //             // mpQueue.length--;
-    //             // let obj = mpQueue.heap.pop();
-    //             // mpQueue.heap[0] = obj;
-    //             // // [G:25, ]
-    //             // mpQueue.binarySortDown();
-    //             // // We are trying to sort the last value who is now the first
-    //             // // to its correct spot.
+            expect(mpQueue.heap[0].priority).to.equal(29);
 
-    //             // expect()
-    //         });
+        });
 
-    //     });
 
-    //     context('When the last number is smaller than the largest', function () {
-
-    //     });
-
-    // });
-
-    // describe('dequeue', function () {
-
-    // });
+    });
 
 })
