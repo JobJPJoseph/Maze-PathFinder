@@ -8,7 +8,7 @@ const file = path.join(__dirname, "../lib/maze.txt");
 let data = fs.readFileSync(file, "utf-8").trim();
 
 const { FormatMaze } = require('../lib/formatMaze');
-const { getPath, getNeighbors } = require('../lib/pathFinder');
+const { getPath, getNeighbors, findC } = require('../lib/pathFinder');
 
 describe('PathFinder Project', function () {
 
@@ -22,10 +22,17 @@ describe('PathFinder Project', function () {
 
         for (let x = 0; x < format.matrix.length; x++) {
 
-            for (let y = 0; y < format.matrix.length; y++) {
+            for (let y = 0; y < format.matrix[x].length; y++) {
 
-                if (format.matrix[x][y] === "S") start = [x, y];
-                if (format.matrix[x][y] === "E") end = [x, y];
+                if (format.matrix[x][y] === "S") {
+                    console.log([x, y]);
+                    start = [x, y];
+                }
+
+                if (format.matrix[x][y] === "E") {
+                    console.log([x, y]);
+                    end = [x, y];
+                }
 
             }
 
@@ -54,16 +61,34 @@ describe('PathFinder Project', function () {
 
     });
 
-    // describe('getPath', function () {
+    describe('findC', function () {
 
-    //     it('should declare the function', function () {
+        it('should return the result of a^2 + b^2 = c^2 and square it', function () {
+            let leftOfStart = [6, 2]
+            let expected = findC(leftOfStart, end);
+            expect(expected).to.equal(13);
 
-    //     });
+            let upFromStart = [5, 1];
+            let expected1 = findC(upFromStart, end);
+            expect(expected1).to.equal(Math.sqrt(185));
+        });
 
-    //     it('should return the optimal path from S to E', function () {
+    });
 
-    //     });
+    describe('getPath', function () {
 
-    // });
+        it('should declare the function', function () {
+            expect(getPath)
+        });
+
+        it('should return the optimal path from S to E', function () {
+            // console.log(format.matrix)
+            let expected = getPath(start, end, format.matrix);
+            // console.log(expected);
+            // console.log(format.printMatrix());
+
+        });
+
+    });
 
 });
