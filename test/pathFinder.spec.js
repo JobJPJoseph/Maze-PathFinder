@@ -25,12 +25,12 @@ describe('PathFinder Project', function () {
             for (let y = 0; y < format.matrix[x].length; y++) {
 
                 if (format.matrix[x][y] === "S") {
-                    console.log([x, y]);
+                    // console.log([x, y]);
                     start = [x, y];
                 }
 
                 if (format.matrix[x][y] === "E") {
-                    console.log([x, y]);
+                    // console.log([x, y]);
                     end = [x, y];
                 }
 
@@ -84,7 +84,7 @@ describe('PathFinder Project', function () {
         it('should return the optimal path from S to E', function () {
             // console.log(format.matrix)
             let expected = getPath(start, end, format.matrix);
-            // console.log(expected);
+            console.log(expected);
             // console.log(format.printMatrix());
 
         });
