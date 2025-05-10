@@ -82,14 +82,13 @@ describe('PathFinder Project', function () {
         });
 
         it('should return the optimal path from S to E', function () {
-            // console.log(format.matrix)
             let expected = getPath(start, end, format.matrix);
             console.log(expected);
 
             for (let i = 0; i < expected.length; i++) {
                 let [row, col] = expected[i];
 
-                format.matrix[row][col] = "X";
+                if (format.matrix[row][col] === " ")format.matrix[row][col] = "X";
             }
 
             console.log(format.printMatrix());
