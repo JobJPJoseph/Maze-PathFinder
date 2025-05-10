@@ -85,7 +85,14 @@ describe('PathFinder Project', function () {
             // console.log(format.matrix)
             let expected = getPath(start, end, format.matrix);
             console.log(expected);
-            // console.log(format.printMatrix());
+
+            for (let i = 0; i < expected.length; i++) {
+                let [row, col] = expected[i];
+
+                format.matrix[row][col] = "X";
+            }
+
+            console.log(format.printMatrix());
 
         });
 
