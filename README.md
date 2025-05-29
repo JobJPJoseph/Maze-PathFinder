@@ -2,13 +2,13 @@
 
 ## Concepts to implement:
     Binding (context): Not necessary
-    NPM Packages (Mocha/Chai):
+    NPM Packages (Mocha/Chai): Done
     Class instances: Not necessary
-    Single Respondsibility Principle:
+    Single Respondsibility Principle: Done
     Custom Errors:
     Handling Errors:
-    ES6 syntax:
-    Priority Queue:
-    Implement Data Structures (Graphs/Matrix):
-    Implement Algorithm (DFT or BFT):
+    ES6 syntax: Done
+    Priority Queue: Done
+    Implement Data Structures (Graphs/Matrix): Done
+    Implement Algorithm (DFT or BFT): Done
     Optimization (Dijkstra Algorithm!!!):
